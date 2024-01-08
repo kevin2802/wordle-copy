@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import React, { useEffect, useState } from "react";
+//2 components
+const Guess = ( {word , guess} )=>{
+  
+}
 
-function App() {
-  const [count, setCount] = useState(0)
+const Game = ( {word} ) =>{
+  //useState
+  const [count,setCount] = useState(0)//count starts at 0
+  const [guess,setGuess] = useState("")//empty string
+  const [guesses,setGuesses] = useState([])//empty guesses array
+  const [correctGuess,setCorrectGuess] = useState(false)//start with false
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  //functions??
+  const handleGuess = async (newGuess) =>{
+    setCount ((count)=>count+1) //update count 
+    setGuesses([...guesses,newGuess])//create new array with new guess added to it
+    if (guess === word){
+      setCorrectGuess(true)//correct guess
+    }
+    setGuess("");
+  }
+
+
+  return(
+    <div>
+      <h1>World Wide Wordle</h1>
+      <p>Guess the secret word!</p>
+      
+    </div>
   )
 }
 
-export default App
+function App() {
+  return (
+    <div className="App">
+      <Game word = "cable"/>
+      
+    </div>
+  );
+}
+
+export default App;
